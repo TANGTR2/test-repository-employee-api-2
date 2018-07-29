@@ -13,8 +13,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @CreatedDate
-    private ZonedDateTime createdDate = ZonedDateTime.now();
+    private String gender;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,14 +22,19 @@ public class Employee {
 
     public Employee(){}
 
+    public Employee(String name, String gender) {
+        this.name = name;
+        this.gender = gender;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public ZonedDateTime getCreatedDate() { return createdDate; }
-    public void setCreatedDate(ZonedDateTime createdDate) { this.createdDate = createdDate; }
+    public String getGender() { return gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
     public Company getCompany() { return company; }
     public void setCompany(Company company) { this.company = company; }
