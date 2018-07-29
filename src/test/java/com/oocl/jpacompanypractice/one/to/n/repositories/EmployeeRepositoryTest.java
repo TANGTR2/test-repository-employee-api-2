@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.EnumMap;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -46,5 +45,15 @@ public class EmployeeRepositoryTest {
 
     @Test
     public void deleteEmployeeById() {
+        //given
+        entityManager.clear();
+        entityManager.persist(new Employee("alibaba1","male"));
+        //when
+        System.out.println(employeeRepository.findAll().size());
+        Long id = Long.valueOf(entityManager.persistAndGetId(new Employee("tengxun1","male")).toString());
+        int isDeleted = employeeRepository.deleteEmployeeById(id);
+        //then
+        assertThat(isDeleted, is(1));
+        assertThat(employeeRepository.findAll().size(), is(1));
     }
 }
