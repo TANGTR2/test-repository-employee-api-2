@@ -56,4 +56,20 @@ public class EmployeeRepositoryTest {
         assertThat(isDeleted, is(1));
         assertThat(employeeRepository.findAll().size(), is(1));
     }
+
+    @Test
+    public void findAll() {
+        //given
+        entityManager.persist(new Employee("alibaba1","male"));
+        entityManager.persist(new Employee("tengxun1","female"));
+        //when
+        List<Employee> employees = employeeRepository.findAll();
+        //then
+        assertThat(employees.size(), is(2));
+        assertThat(employees.get(0).getName(), is("alibaba1"));
+        assertThat(employees.get(0).getGender(), is("male"));
+        assertThat(employees.get(1).getName(), is("tengxun1"));
+        assertThat(employees.get(1).getGender(), is("female"));
+
+    }
 }
