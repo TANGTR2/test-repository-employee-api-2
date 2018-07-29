@@ -1,0 +1,457 @@
+{
+	"info": {
+		"_postman_id": "bc4a3508-1465-40fa-b7d7-64d7125cb815",
+		"name": "company",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "e7d74e49-7e37-4b95-9eea-e01458b6f376",
+			"name": "create-company-without-employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f87c7b0-bf86-4178-8ce9-d0bda772c594",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"create company without employee\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"oocl\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"oocl\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/companies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "e43a551e-9538-4eef-ba3f-8a8286bbd9ea",
+			"name": "create company with employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7e123026-5b5c-4015-9c11-14130b6b8308",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"create company with employee\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"    pm.expect(jsonData.name).to.eql(\"oocl\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"oocl\",\n\t\"employees\":[{\n\t\t\"name\": \"Tracy\"\n\t}] \n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/companies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "7355bfca-58b0-4582-a310-6a35ad7efb66",
+			"name": "get-all-companyes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "afe34337-edab-4425-9934-2301f1d092f8",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"get all company\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(1);",
+							"});",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/v1/companies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "639c0bf4-f354-42ad-acc7-f7c9ada07c55",
+			"name": "get-company-by-id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aeabf867-6e55-4913-9d47-fc4d56c78bbd",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"get company by id\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"    pm.expect(jsonData.name).to.eql(\"oocl\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/v1/companies/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"companies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "6fbac95b-83ec-4ce7-9c65-46c67c7b2c86",
+			"name": "update-company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a6d69a8-d2a9-4158-b4b8-90d740fcc46c",
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest(\"http://localhost:8080/v1/companies/1\", function (err, response) {",
+							"    pm.test(\"update company \", function () {",
+							"        var jsonData = response.json();",
+							"        pm.expect(jsonData.id).to.eql(1);",
+							"        pm.expect(jsonData.name).to.eql(\"alibaba\");",
+							"    });",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": 1,\"name\": \"alibaba\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/companies/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"companies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "359f58e3-ba43-4628-b4cf-2237aca5a0be",
+			"name": "delete-company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e885536e-8f7b-4309-84d9-f370159392f8",
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest(\"http://localhost:8080/v1/companies\", function (err, response) {",
+							"    pm.test(\"delete company\", function () {",
+							"        var jsonData = response.json();",
+							"        pm.expect(jsonData.length).to.eql(0);",
+							"    });",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/v1/companies/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"companies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "aabd5372-14ab-4931-be32-a1d1c7c62016",
+			"name": "cerate-klass-without-leader",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b98b14d7-3cac-4c1d-9a77-ff24dcac0b79",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"first\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v3/klasses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v3",
+						"klasses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "9e9887b7-23a7-4b6c-81b0-aaab16e5bcfa",
+			"name": "create-klass-with-leader",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"first\",\n\t\"leader\":{\"name\":\"1\"}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v3/klasses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v3",
+						"klasses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "41e322ff-ba32-477f-903a-26188925384e",
+			"name": "get-all-klass",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/v3/klasses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v3",
+						"klasses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "4920b6c2-b96e-441b-8c64-6c52d0735b5f",
+			"name": "get-klass-by-id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/v3/klasses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v3",
+						"klasses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "ec01a46a-b7bf-4925-b88d-6c6c6571db82",
+			"name": "update-klass",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"class_3\",\n\t\"leader\":{\n\t\t\"name\":\"Tony\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v3/klasses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v3",
+						"klasses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "02da53a7-cf31-4691-82c8-14d576a8a7a0",
+			"name": "delete-klass",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc27bd69-b1b3-42b1-9d2b-9c68ea3cfc62",
+						"type": "text/javascript",
+						"exec": [
+							"pm.sendRequest(\"http://localhost:8080/v3/klasses\", function (err, response) {",
+							"    pm.test(\"delete klass\", function () {",
+							"        var jsonData = response.json();",
+							"        pm.expect(jsonData.length).to.eql(0);",
+							"    });",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/v3/klasses/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v3",
+						"klasses",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
