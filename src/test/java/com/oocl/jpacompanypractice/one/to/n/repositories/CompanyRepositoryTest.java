@@ -47,6 +47,16 @@ public class CompanyRepositoryTest {
 
     @Test
     public void findByName() {
+        //given
+        String name = "tengxun";
+        ArrayList<Employee> employees = new ArrayList<>();
+        Employee employee = new Employee("tengxun1","male");
+        employees.add(employee);
+        entityManager.persist(new Company("tengxun",employees));
+        //when
+        Company company = companyRepository.findByName(name);
+        //then
+        assertThat(company.getName(), is("tengxun"));
     }
 
     @Test
